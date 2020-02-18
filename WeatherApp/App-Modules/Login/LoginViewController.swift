@@ -73,15 +73,6 @@ class LoginViewController: UIViewController  {
                 appdelegate.window?.rootViewController = weather
             }
         }
-        
-        /*
-        Hi Dheeraj,
-        Yes I have faced problems while doing assignment and I have found solution to problem
-         1. login via email : For this  come up with solution to use dummy API which helps to Test front-end against a real API,  https://reqres.in/api/login for authentication purpose
-         2. weather API: I have tried multiple APIs for 3 days forecast that was time consuming and also requires API key finally i have found api which doesnot requires api i have used it https://fcc-weather-api.glitch.me/api/current?lat=
-         
-         
- */
     }
     
     func displayAlertView(_ message:String){

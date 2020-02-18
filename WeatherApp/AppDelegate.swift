@@ -30,7 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func initialSetUp(){
         GIDSignIn.sharedInstance().clientID = googleSignInKey
-        GMSPlacesClient.provideAPIKey(googlePlacesApiKey)
+        if GMSPlacesClient.provideAPIKey(googlePlacesApiKey) {
+            print("dklsgjksdjg")
+            
+
+            
+        }
+        else {
+            print("dsjgghkhgj")
+
+        }
+        
     }
 
     @available(iOS 9.0, *)

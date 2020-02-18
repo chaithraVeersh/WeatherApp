@@ -8,5 +8,4 @@ target 'WeatherApp' do
   # Pods for WeatherApp
 	pod 'GoogleSignIn'
 	pod 'GooglePlaces'
-
 end

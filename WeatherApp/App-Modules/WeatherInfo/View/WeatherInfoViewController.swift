@@ -14,6 +14,8 @@ import LocalAuthentication
 class WeatherInfoViewController: UIViewController {
     var presenter:ViewToPresenterProtocol?
     let localAuthenticationContext = LAContext()
+    var placesClient: GMSPlacesClient!
+
 
     @IBOutlet weak var displayTextLabel: UILabel!
     @IBOutlet weak var placesTextField: UITextField!
@@ -33,8 +35,9 @@ class WeatherInfoViewController: UIViewController {
         }
         presenter?.fetchCurrentLocation()
         authenticationWithTouchID()
+        
+        placesClient = GMSPlacesClient.shared()
     }
-    
     
     
     @IBAction func textFieldTapped(_ sender: Any) {
