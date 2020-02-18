@@ -31,7 +31,7 @@ class WeatherInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let name =  UserDefaults.standard.value(forKey: "fullName") as? String {
-            displayTextLabel.text = "Welcome \(name)"
+            displayTextLabel.text = "Hi \(name)!"
         }
         presenter?.fetchCurrentLocation()
         authenticationWithTouchID()
