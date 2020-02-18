@@ -35,7 +35,6 @@ class WeatherInfoViewController: UIViewController {
         }
         presenter?.fetchCurrentLocation()
         authenticationWithTouchID()
-        
         placesClient = GMSPlacesClient.shared()
     }
     
@@ -46,7 +45,7 @@ class WeatherInfoViewController: UIViewController {
         
         // Specify the place data types to return.
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue))!
+            UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.coordinate.rawValue))!
         autocompleteController.placeFields = fields
         
         // Specify a filter.
@@ -109,6 +108,7 @@ extension WeatherInfoViewController: GMSAutocompleteViewControllerDelegate {
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         // Dismiss when the user canceled the action
         dismiss(animated: true, completion: nil)
+    
     }
 }
 

@@ -9,6 +9,6 @@
 import Foundation
 
      let PROGRESS_INDICATOR_VIEW_TAG: Int = 10
-     let googlePlacesApiKey = "AIzaSyD5UoYCl7pDs5l_Ne8nyJXWzlLcnodTIGs"
+     let googlePlacesApiKey = "AIzaSyAiGXOVyY-0Mx7x4teIxY6DhBnS7zvToUg"
      let googleSignInKey = "155920743965-bc4kn17ucg9ur25s1khe1tjg4d55v6k8.apps.googleusercontent.com"
 
