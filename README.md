@@ -2,7 +2,7 @@ WeatherApp
 
 iOS Weather App
 
-Wherever you are, you will see the forecast of your chosen location right in the palm of your hand. See more detailed info in one overview, such as: feels like temperature, sunrise/sunset, and UV index. Very handy while traveling or with having activities in another city than your own. Rely on The Weather every day! WHY YOU'LL LOVE THE WeatherApp 3-day Weather Forecast, Current Location Info, Unlimited Locations, Feels like temperature.
+Wherever you are, you will see the forecast of your chosen location right in the palm of your hand. See more detailed info in one overview, such as: feels like temperature, sunrise/sunset, and UV index. Very handy while traveling or with having activities in another city than your own. Rely on The Weather every day! WHY YOU'LL LOVE THE WeatherApp day Weather Forecast, Current Location Info, Unlimited Locations, Feels like temperature.
 
 
 Goals and Objectives
