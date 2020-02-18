@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationUsageDescription</key>
-	<string>App Needs your current location</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>App Needs your current location</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App Needs your current location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -29,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.155920743965-bc4kn17ucg9ur25s1khe1tjg4d55v6k8</string>
+				<string>com.googleusercontent.apps.691431459882-npmm0cq3af5j57d5chl82bvv9pt2pk7e</string>
 			</array>
 		</dict>
 	</array>
@@ -37,6 +31,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App Needs your current location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>App Needs your current location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App Needs your current location</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
