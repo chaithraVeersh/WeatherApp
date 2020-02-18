@@ -31,6 +31,9 @@ struct WeatherInfo: Codable{
     var tempMax: Double
     var humidity: Double
     var place: String
+    var pressure: Int
+    var sunrise: Int
+    var sunset: Int
     
     enum CodingKeys: String, CodingKey {
         case temp = "temp"
@@ -40,6 +43,11 @@ struct WeatherInfo: Codable{
         case main = "main"
         case place = "name"
         case humidity = "humidity"
+        
+        case sys = "sys"
+        case sunrise = "sunrise"
+        case sunset = "sunset"
+        case pressure = "pressure"
     }
     
     
@@ -47,11 +55,17 @@ struct WeatherInfo: Codable{
         let container = try decoder.container(keyedBy: CodingKeys.self)
         place = try container.decode(String.self, forKey: .place)
         data = try container.decode([WeatherDescription].self, forKey: .weather)
+        
         let temperatures = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .main)
         temp = try temperatures.decode(Double.self, forKey: .temp)
         tempMin = try temperatures.decode(Double.self, forKey: .tempMin)
         tempMax = try temperatures.decode(Double.self, forKey: .tempMax)
         humidity = try temperatures.decode(Double.self, forKey: .humidity)
+        pressure = try temperatures.decode(Int.self, forKey: .pressure)
+
+        let sys = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .sys)
+        sunrise = try sys.decode(Int.self, forKey: .sunrise)
+        sunset = try sys.decode(Int.self, forKey: .sunset)
     }
     
     

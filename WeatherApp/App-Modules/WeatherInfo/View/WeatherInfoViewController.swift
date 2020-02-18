@@ -15,8 +15,8 @@ class WeatherInfoViewController: UIViewController {
     var presenter:ViewToPresenterProtocol?
     let localAuthenticationContext = LAContext()
     var placesClient: GMSPlacesClient!
-
-
+    
+    
     @IBOutlet weak var displayTextLabel: UILabel!
     @IBOutlet weak var placesTextField: UITextField!
     
@@ -26,7 +26,10 @@ class WeatherInfoViewController: UIViewController {
     
     @IBOutlet weak var minimumTempLabel: UILabel!
     @IBOutlet weak var maximumTempLabel: UILabel!
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var sunsetLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +63,7 @@ class WeatherInfoViewController: UIViewController {
 }
 
 extension WeatherInfoViewController:PresenterToViewProtocol {
-
+    
     func showPlaceName(place: String) {
         self.placesTextField.text = place
     }
@@ -74,19 +77,22 @@ extension WeatherInfoViewController:PresenterToViewProtocol {
         DispatchQueue.main.async {
             self.descriptionLabel.text = weather.data.first?.description
             self.temperatureLabel.text = "\(weather.temp)°"
-            self.minimumTempLabel.text = "Minimum Temp: \(weather.tempMin)°"
-            self.maximumTempLabel.text = "Maximum Temp: \(weather.tempMax)°"
+            self.minimumTempLabel.text = "Minimum: \(weather.tempMin)°"
+            self.maximumTempLabel.text = "Maximum: \(weather.tempMax)°"
             self.humidityLabel.text = "Humidity: \(weather.humidity)"
+            self.pressureLabel.text = "Pressure: \(weather.pressure)"
+            
+            self.sunriseLabel.text = "Sunrise: \(weather.sunrise.getTimeFromInterval())"
+            self.sunsetLabel.text = "Sunset: \(weather.sunset.getTimeFromInterval())"
             
             if let icon = weather.data.first?.icon {
-                print("icon = \(icon)")
                 self.presenter?.fetchImageForUrl(icon)
             }
         }
     }
     
     func displayImage(image: UIImage) {
-     DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.descImageView.image = image
         }
     }
@@ -108,7 +114,7 @@ extension WeatherInfoViewController: GMSAutocompleteViewControllerDelegate {
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         // Dismiss when the user canceled the action
         dismiss(animated: true, completion: nil)
-    
+        
     }
 }
 

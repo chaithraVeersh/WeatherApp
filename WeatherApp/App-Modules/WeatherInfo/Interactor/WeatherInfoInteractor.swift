@@ -48,7 +48,6 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
     
     func fetchImageForIcon(icon: String) {
         NetworkHandler().getData(urlString: icon) { (data, error) in
-            print(error ?? "no error")
             if let imageData = data as Data? {
                 if let img = UIImage(data: imageData){
                     self.presenter?.imageReceived(image: img)

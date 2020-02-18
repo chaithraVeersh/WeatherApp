@@ -42,3 +42,13 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
+
+extension Int {
+    func getTimeFromInterval() -> String{
+        let  sunrise = Date(timeIntervalSinceReferenceDate: TimeInterval(self))
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let time = formatter.string(from: sunrise)
+        return time
+    }
+}
