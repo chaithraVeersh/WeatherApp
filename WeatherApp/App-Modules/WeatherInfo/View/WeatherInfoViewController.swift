@@ -50,7 +50,7 @@ class WeatherInfoViewController: UIViewController {
         
         // Specify a filter.
         let filter = GMSAutocompleteFilter()
-        filter.type = .address
+        filter.type = .noFilter
         autocompleteController.autocompleteFilter = filter
         
         // Display the autocomplete view controller.
