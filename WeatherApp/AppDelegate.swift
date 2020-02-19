@@ -17,8 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         initialSetUp()
-        if let loggedInUser =  UserDefaults.standard.value(forKey: "userID") as? String {
-            print(loggedInUser)
+        if let _ =  UserDefaults.standard.value(forKey: "userID") as? String {
             let notice = WeatherInfoRouter.createModule()
                    self.window = UIWindow(frame: UIScreen.main.bounds)
                    self.window?.rootViewController = notice

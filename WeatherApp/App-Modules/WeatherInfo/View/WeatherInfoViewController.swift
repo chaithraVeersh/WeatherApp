@@ -6,7 +6,6 @@
 //  Copyright © 2020 Chaithra TV. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import GooglePlaces
 import LocalAuthentication
@@ -14,8 +13,6 @@ import LocalAuthentication
 class WeatherInfoViewController: UIViewController {
     var presenter:ViewToPresenterProtocol?
     let localAuthenticationContext = LAContext()
-    var placesClient: GMSPlacesClient!
-    
     
     @IBOutlet weak var displayTextLabel: UILabel!
     @IBOutlet weak var placesTextField: UITextField!
@@ -33,16 +30,19 @@ class WeatherInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let name =  UserDefaults.standard.value(forKey: "fullName") as? String {
-            displayTextLabel.text = "Hi \(name)!"
-        }
         setupUI()
-        presenter?.fetchCurrentLocation()
+
+        //touch ID Authentication
         authenticationWithTouchID()
-        placesClient = GMSPlacesClient.shared()
+        
+        //display LoggedIn user name
+        if let name =  UserDefaults.standard.value(forKey: "fullName") as? String {
+            displayTextLabel.text = "Hey \(name)!"
+        }
     }
     
     func setupUI() {
+        //add edit button to textField
         let editImgeView = UIImageView(frame: CGRect(x: placesTextField.frame.size.width - 40 , y: 5, width: 22, height: 22))
         editImgeView.image = UIImage(named: "edit");
         placesTextField.rightView = editImgeView
@@ -72,25 +72,31 @@ class WeatherInfoViewController: UIViewController {
 extension WeatherInfoViewController:PresenterToViewProtocol {
     
     func showPlaceName(place: String) {
-        self.placesTextField.text = place
+        DispatchQueue.main.async {
+            self.placesTextField.text = place
+        }
     }
     
-    func fetchLocationForCoOrds(latitude: Double, longitude: Double) {
-        print(latitude, longitude)
+    func showCurrentLocation(latitude: Double, longitude: Double) {
+        showProgressIndicator(view: self.view)
         presenter?.fetchWeatherInfo(latitude: latitude, longitude: longitude)
     }
     
     func showWeatherInfo(weather: WeatherInfo) {
+        hideProgressIndicator(view: self.view)
+        
         DispatchQueue.main.async {
             self.descriptionLabel.text = weather.data.first?.description
             self.temperatureLabel.text = "\(weather.temp)°"
-            self.minimumTempLabel.text = "Minimum: \(weather.tempMin)°"
-            self.maximumTempLabel.text = "Maximum: \(weather.tempMax)°"
-            self.humidityLabel.text = "Humidity: \(weather.humidity)"
-            self.pressureLabel.text = "Pressure: \(weather.pressure)"
             
-            self.sunriseLabel.text = "Sunrise: \(weather.sunrise.getTimeFromInterval())"
-            self.sunsetLabel.text = "Sunset: \(weather.sunset.getTimeFromInterval())"
+            self.minimumTempLabel.text = "\(weather.tempMin)°"
+            self.maximumTempLabel.text = "\(weather.tempMax)°"
+            
+            self.humidityLabel.text = "\(weather.humidity)"
+            self.pressureLabel.text = "\(weather.pressure)"
+            
+            self.sunriseLabel.text = weather.sunrise.getTimeFromInterval()
+            self.sunsetLabel.text =  weather.sunset.getTimeFromInterval()
             
             if let icon = weather.data.first?.icon {
                 self.presenter?.fetchImageForUrl(icon)
@@ -98,7 +104,7 @@ extension WeatherInfoViewController:PresenterToViewProtocol {
         }
     }
     
-    func displayImage(image: UIImage) {
+    func showImageForWeather(image: UIImage) {
         DispatchQueue.main.async {
             self.descImageView.image = image
         }
@@ -121,7 +127,6 @@ extension WeatherInfoViewController: GMSAutocompleteViewControllerDelegate {
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         // Dismiss when the user canceled the action
         dismiss(animated: true, completion: nil)
-        
     }
 }
 
@@ -140,28 +145,31 @@ extension WeatherInfoViewController {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reasonString) { success, evaluateError in
                 
                 if success {
-                    
-                    //TODO: User authenticated successfully, take appropriate action
-                    
+                    self.presenter?.fetchCurrentLocation()
                 } else {
-                    //TODO: User did not authenticate successfully, look at error and take appropriate action
                     guard let error = evaluateError else {
                         return
                     }
-                    
                     print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-                    //TODO: If you have choosen the 'Fallback authentication mechanism selected' (LAError.userFallback). Handle gracefully
-                    
+                    self.displayTouchIDAlertView(error.localizedDescription)
                 }
             }
         } else {
-            
             guard let error = authError else {
                 return
             }
-            //TODO: Show appropriate alert if biometry/TouchID/FaceID is lockout or not enrolled
             print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+            displayTouchIDAlertView("TouchID/FaceID is lockout or not enrolled in device")
         }
+    }
+    
+    func displayTouchIDAlertView(_ message:String){
+        let alert = UIAlertController.init(title: "Authentication Failed", message: "Unlock with Touch ID to use WeatherApp", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Use Touch Id", style: .cancel) { (action:UIAlertAction!) in
+            self.authenticationWithTouchID()
+        }
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {

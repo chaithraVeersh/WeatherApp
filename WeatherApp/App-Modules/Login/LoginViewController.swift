@@ -16,7 +16,6 @@ class LoginViewController: UIViewController  {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: GIDSignInButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialiseGoogleSignIn()
@@ -29,11 +28,9 @@ class LoginViewController: UIViewController  {
         GIDSignIn.sharedInstance().delegate = self
     }
     
-
     @IBAction func loginButtonClicked(_ sender: Any) {
         if let email = emailTextField.text, let password = passwordTextField.text {
             if email.isValidEmail() && password.isValidPassword(){
-                //  navigateToWeatherView()
                 loginUser(email: email, password: password)
             }
             else {
@@ -42,9 +39,16 @@ class LoginViewController: UIViewController  {
         }
     }
     
+    @IBAction func socialLoginAction(_ sender: Any) {
+        displayAlertView("This Feature Yet to Implement")
+    }
+    
+
     func loginUser(email: String, password: String){
+        showProgressIndicator(view: self.view)
         let param = "email=eve.holt@reqres.in&password=cityslicka"
         NetworkHandler().postData(params: param, urlString: "https://reqres.in/api/login") { (data, error) in
+            hideProgressIndicator(view: self.view)
             if let error = error {
                 self.displayAlertView(error.localizedDescription)
             }
@@ -64,7 +68,6 @@ class LoginViewController: UIViewController  {
     }
     
     func navigateToWeatherView(){
-        // ...
         let weather = WeatherInfoRouter.createModule()
         DispatchQueue.main.async {
             if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -91,11 +94,12 @@ extension LoginViewController: UITextFieldDelegate {
 }
 
 extension LoginViewController :GIDSignInDelegate {
+    
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
               withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
+        displayAlertView(error.localizedDescription)
     }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         if let error = error {
@@ -108,9 +112,10 @@ extension LoginViewController :GIDSignInDelegate {
         }
         if let userID = user.userID, let fullName = user.profile.name {
             saveUserInDefaults(userId: userID, fullName: fullName)
+            navigateToWeatherView()
         }
-        navigateToWeatherView()
     }
+    
     func saveUserInDefaults(userId:String, fullName:String){
         UserDefaults.standard.set(userId, forKey: "userID")
         UserDefaults.standard.set(fullName, forKey: "fullName")

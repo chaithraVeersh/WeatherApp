@@ -16,6 +16,7 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
     let locationManager = CLLocationManager()
     
     func fetchCurrentLocation(){
+        //core location initialization
         DispatchQueue.main.async {
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager.delegate = self
@@ -33,9 +34,9 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
     }
     
     func fetchWeatherInfo(lat: Double, long: Double) {
+        //weather API call
         let urlString = "https://fcc-weather-api.glitch.me/api/current?lat=\(lat)&lon=\(long)"
         NetworkHandler().getData(urlString: urlString) { (data, error) in
-            //display Error, data
             guard let responseData = data else{
                 return
             }
@@ -47,6 +48,7 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
     
     
     func fetchImageForIcon(icon: String) {
+        //weather image fetch
         NetworkHandler().getData(urlString: icon) { (data, error) in
             if let imageData = data as Data? {
                 if let img = UIImage(data: imageData){
@@ -62,7 +64,25 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
 
 extension WeatherInfoInteractor:CLLocationManagerDelegate{
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+            break
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+            break
+        case .restricted, .denied:
+            // restricted by e.g. parental controls. User can't enable Location Services
+            // user denied your app access to Location Services, but can grant access from Settings.app
+            break
+        default:
+            break
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //current location
         guard let location:CLLocation = manager.location else { return }
         locationManager.stopUpdatingLocation()
         presenter?.locationFetched(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -75,6 +95,7 @@ extension WeatherInfoInteractor:CLLocationManagerDelegate{
     }
     
     func getAddressFromLocation(_ location: CLLocation) {
+        //reverse geocoding
         let ceo: CLGeocoder = CLGeocoder()
         ceo.reverseGeocodeLocation(location, completionHandler:
             {(placemarks, error) in

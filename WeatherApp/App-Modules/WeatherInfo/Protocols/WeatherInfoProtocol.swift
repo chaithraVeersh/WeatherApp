@@ -22,9 +22,9 @@ protocol ViewToPresenterProtocol: class{
 
 protocol PresenterToViewProtocol: class{
     func showPlaceName(place:String)
-    func fetchLocationForCoOrds(latitude: Double, longitude: Double)
+    func showCurrentLocation(latitude: Double, longitude: Double)
     func showWeatherInfo(weather: WeatherInfo)
-    func displayImage(image: UIImage)
+    func showImageForWeather(image: UIImage)
 }
 
 protocol PresenterToRouterProtocol: class {
@@ -33,14 +33,15 @@ protocol PresenterToRouterProtocol: class {
 
 protocol PresenterToInteractorProtocol: class {
     var presenter:InteractorToPresenterProtocol? {get set}
+    
     func fetchCurrentLocation()
     func fetchWeatherInfo(lat:Double, long: Double)
     func fetchImageForIcon(icon: String)
 }
 
 protocol InteractorToPresenterProtocol: class {
-     func locationFetched(latitude:Double, longitude: Double)
-     func placeFetched(string: String)
+    func locationFetched(latitude:Double, longitude: Double)
+    func placeFetched(string: String)
     func weatherInfoReceived(weatherInfo: WeatherInfo)
     func imageReceived(image: UIImage)
 }

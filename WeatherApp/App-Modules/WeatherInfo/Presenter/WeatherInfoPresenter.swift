@@ -30,7 +30,7 @@ class WeatherInfoPresenter: ViewToPresenterProtocol {
 
 extension WeatherInfoPresenter : InteractorToPresenterProtocol {
     func imageReceived(image: UIImage) {
-        view?.displayImage(image: image)
+        view?.showImageForWeather(image: image)
     }
     
     func weatherInfoReceived(weatherInfo: WeatherInfo) {
@@ -38,7 +38,7 @@ extension WeatherInfoPresenter : InteractorToPresenterProtocol {
     }
     
     func locationFetched(latitude: Double, longitude: Double) {
-        view?.fetchLocationForCoOrds(latitude: latitude, longitude: longitude)
+        view?.showCurrentLocation(latitude: latitude, longitude: longitude)
     }
     
     func placeFetched(string: String) {
