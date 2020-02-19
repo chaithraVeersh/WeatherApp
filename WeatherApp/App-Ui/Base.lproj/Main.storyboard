@@ -148,9 +148,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="tbd-hw-Epz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414.00000000000011" height="896"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-mC-138">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-mC-138">
                                 <rect key="frame" x="20" y="64" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,14 +171,14 @@
                                 </connections>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="dO2-4i-JA2">
-                                <rect key="frame" x="182" y="164" width="50" height="50"/>
+                                <rect key="frame" x="182" y="164" width="50.000000000000114" height="50.000000000000114"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bQh-0O-bOO"/>
                                     <constraint firstAttribute="width" constant="50" id="gzg-U4-1SI"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIf-1N-aha">
-                                <rect key="frame" x="207" y="134" width="0.0" height="0.0"/>
+                                <rect key="frame" x="20" y="134" width="374" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -321,12 +321,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="rIf-1N-aha" firstAttribute="centerX" secondItem="fc8-iT-8Rn" secondAttribute="centerX" id="2wz-6Z-JDc"/>
                             <constraint firstItem="tbd-hw-Epz" firstAttribute="leading" secondItem="LCT-2e-VVI" secondAttribute="leading" id="5cq-ud-LwN"/>
                             <constraint firstItem="UUO-mC-138" firstAttribute="top" secondItem="LCT-2e-VVI" secondAttribute="top" constant="20" id="AgH-u9-1PA"/>
                             <constraint firstItem="v7d-dx-bkp" firstAttribute="top" secondItem="UUO-mC-138" secondAttribute="bottom" constant="10" id="Aqd-0H-ATm"/>
+                            <constraint firstAttribute="trailing" secondItem="rIf-1N-aha" secondAttribute="trailing" constant="20" id="CnL-4c-AhF"/>
                             <constraint firstItem="LCT-2e-VVI" firstAttribute="trailing" secondItem="tbd-hw-Epz" secondAttribute="trailing" id="G40-uc-flh"/>
                             <constraint firstItem="LCT-2e-VVI" firstAttribute="trailing" secondItem="UUO-mC-138" secondAttribute="trailing" constant="20" id="N7z-VP-DTQ"/>
+                            <constraint firstItem="rIf-1N-aha" firstAttribute="leading" secondItem="fc8-iT-8Rn" secondAttribute="leading" constant="20" id="Okk-Sy-j06"/>
                             <constraint firstItem="dO2-4i-JA2" firstAttribute="centerX" secondItem="fc8-iT-8Rn" secondAttribute="centerX" id="QRi-GS-8KQ"/>
                             <constraint firstItem="tbd-hw-Epz" firstAttribute="top" secondItem="fc8-iT-8Rn" secondAttribute="top" id="ZGi-xG-FoA"/>
                             <constraint firstAttribute="bottom" secondItem="tbd-hw-Epz" secondAttribute="bottom" id="cJ0-OU-TC5"/>
