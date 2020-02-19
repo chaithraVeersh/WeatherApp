@@ -36,11 +36,18 @@ class WeatherInfoViewController: UIViewController {
         if let name =  UserDefaults.standard.value(forKey: "fullName") as? String {
             displayTextLabel.text = "Hi \(name)!"
         }
+        setupUI()
         presenter?.fetchCurrentLocation()
         authenticationWithTouchID()
         placesClient = GMSPlacesClient.shared()
     }
     
+    func setupUI() {
+        let editImgeView = UIImageView(frame: CGRect(x: placesTextField.frame.size.width - 40 , y: 5, width: 22, height: 22))
+        editImgeView.image = UIImage(named: "edit");
+        placesTextField.rightView = editImgeView
+        placesTextField.rightViewMode = .always
+    }
     
     @IBAction func textFieldTapped(_ sender: Any) {
         let autocompleteController = GMSAutocompleteViewController()
