@@ -48,7 +48,9 @@ class LoginViewController: UIViewController  {
         showProgressIndicator(view: self.view)
         let param = "email=eve.holt@reqres.in&password=cityslicka"
         NetworkHandler().postData(params: param, urlString: "https://reqres.in/api/login") { (data, error) in
-            hideProgressIndicator(view: self.view)
+            DispatchQueue.main.async {
+                hideProgressIndicator(view: self.view)
+            }
             if let error = error {
                 self.displayAlertView(error.localizedDescription)
             }
@@ -67,10 +69,10 @@ class LoginViewController: UIViewController  {
     }
     
     func navigateToWeatherView(userName: String, userId: String){
-        let weather = WeatherInfoRouter.createModule()
-        weather.userName = userName
-        weather.userId = userId
         DispatchQueue.main.async {
+            let weather = WeatherInfoRouter.createModule()
+            weather.userName = userName
+            weather.userId = userId
             if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
                 appdelegate.window?.rootViewController = weather
             }
