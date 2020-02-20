@@ -104,9 +104,9 @@ extension WeatherInfoViewController:PresenterToViewProtocol {
     }
     
     func showWeatherInfo(weather: WeatherInfo) {
-        hideProgressIndicator(view: self.view)
         
         DispatchQueue.main.async {
+            hideProgressIndicator(view: self.view)
             self.descriptionLabel.text = weather.data.first?.description
             self.temperatureLabel.text = "\(weather.temp)°"
             
