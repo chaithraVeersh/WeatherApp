@@ -24,7 +24,6 @@ class LoginViewController: UIViewController  {
     func initialiseGoogleSignIn(){
         signInButton.style = GIDSignInButtonStyle.iconOnly
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         GIDSignIn.sharedInstance().delegate = self
     }
     
