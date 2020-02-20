@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 import CoreLocation
+import GoogleSignIn
 
 class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
-    
     var presenter: InteractorToPresenterProtocol?
     let locationManager = CLLocationManager()
     
@@ -57,9 +57,22 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
             }
         }
     }
+    
+    func logOut() {
+        GIDSignIn.sharedInstance()?.signOut()
+        removeUserFromDefaults()
+    }
+    
+    func removeUserFromDefaults(){
+        UserDefaults.standard.removeObject(forKey: kUserID)
+        UserDefaults.standard.removeObject(forKey: kUserName)
+    }
+    
+    func saveUserInDefaults(userId:String, username:String){
+        UserDefaults.standard.set(userId, forKey: kUserID)
+        UserDefaults.standard.set(username, forKey: kUserName)
+    }
 }
-
-
 
 
 extension WeatherInfoInteractor:CLLocationManagerDelegate{

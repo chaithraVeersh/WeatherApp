@@ -28,17 +28,17 @@ class WeatherInfoViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
     
+    var userName = ""
+    var userId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
+        
         //touch ID Authentication
         authenticationWithTouchID()
         
-        //display LoggedIn user name
-        if let name =  UserDefaults.standard.value(forKey: "fullName") as? String {
-            displayTextLabel.text = "Hey \(name)!"
-        }
+        
     }
     
     func setupUI() {
@@ -67,6 +67,27 @@ class WeatherInfoViewController: UIViewController {
         present(autocompleteController, animated: true, completion: nil)
     }
     
+    @IBAction func logOutAction(_ sender: Any) {
+        presenter?.logout()
+        let loginView =  UIStoryboard(name:"Main",bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        DispatchQueue.main.async {
+            if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
+                appdelegate.window?.rootViewController = loginView
+            }
+        }
+    }
+    
+    func updateUIOnSuccesfulAuthentication(){
+        DispatchQueue.main.async {
+            self.presenter?.fetchCurrentLocation()
+            if self.userName.count > 0 && self.userId.count > 0 {
+                self.presenter?.saveUserInDefaults(userId: self.userId, username: self.userName)
+            }
+            if let name =  UserDefaults.standard.value(forKey: kUserName) as? String {
+                self.displayTextLabel.text = "Hey \(name)!"
+            }
+        }
+    }
 }
 
 extension WeatherInfoViewController:PresenterToViewProtocol {
@@ -145,7 +166,7 @@ extension WeatherInfoViewController {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reasonString) { success, evaluateError in
                 
                 if success {
-                    self.presenter?.fetchCurrentLocation()
+                    self.updateUIOnSuccesfulAuthentication()
                 } else {
                     guard let error = evaluateError else {
                         return

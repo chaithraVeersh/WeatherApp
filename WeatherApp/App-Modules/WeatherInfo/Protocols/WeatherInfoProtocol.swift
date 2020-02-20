@@ -18,6 +18,8 @@ protocol ViewToPresenterProtocol: class{
     func fetchCurrentLocation()
     func fetchWeatherInfo(latitude:Double, longitude: Double)
     func fetchImageForUrl(_ urlString: String)
+    func saveUserInDefaults(userId:String, username:String)
+    func logout()
 }
 
 protocol PresenterToViewProtocol: class{
@@ -37,6 +39,8 @@ protocol PresenterToInteractorProtocol: class {
     func fetchCurrentLocation()
     func fetchWeatherInfo(lat:Double, long: Double)
     func fetchImageForIcon(icon: String)
+    func saveUserInDefaults(userId:String, username:String)
+    func logOut()
 }
 
 protocol InteractorToPresenterProtocol: class {

@@ -54,8 +54,7 @@ class LoginViewController: UIViewController  {
             }
             if let data = data as? NSDictionary {
                 if let token = data["token"] as? String{
-                    self.saveUserInDefaults(userId: token, fullName: self.nameFromEmail(email: email))
-                    self.navigateToWeatherView()
+                    self.navigateToWeatherView(userName: self.nameFromEmail(email: email), userId: token)
                 }
             }
         }
@@ -67,8 +66,10 @@ class LoginViewController: UIViewController  {
         return v.first ?? "Guest"
     }
     
-    func navigateToWeatherView(){
+    func navigateToWeatherView(userName: String, userId: String){
         let weather = WeatherInfoRouter.createModule()
+        weather.userName = userName
+        weather.userId = userId
         DispatchQueue.main.async {
             if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
                 appdelegate.window?.rootViewController = weather
@@ -111,13 +112,7 @@ extension LoginViewController :GIDSignInDelegate {
             return
         }
         if let userID = user.userID, let fullName = user.profile.name {
-            saveUserInDefaults(userId: userID, fullName: fullName)
-            navigateToWeatherView()
+            self.navigateToWeatherView(userName: fullName, userId: userID)
         }
-    }
-    
-    func saveUserInDefaults(userId:String, fullName:String){
-        UserDefaults.standard.set(userId, forKey: "userID")
-        UserDefaults.standard.set(fullName, forKey: "fullName")
     }
 }

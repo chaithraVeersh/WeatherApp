@@ -9,6 +9,8 @@
 import UIKit
 
 class WeatherInfoPresenter: ViewToPresenterProtocol {
+    
+    
     var interactor: PresenterToInteractorProtocol?
     var router: PresenterToRouterProtocol?
     var view:PresenterToViewProtocol?
@@ -26,6 +28,13 @@ class WeatherInfoPresenter: ViewToPresenterProtocol {
         interactor?.fetchImageForIcon(icon: urlString)
     }
     
+    func saveUserInDefaults(userId: String, username: String) {
+        interactor?.saveUserInDefaults(userId: userId, username: username)
+    }
+    
+    func logout() {
+        interactor?.logOut()
+    }
 }
 
 extension WeatherInfoPresenter : InteractorToPresenterProtocol {
