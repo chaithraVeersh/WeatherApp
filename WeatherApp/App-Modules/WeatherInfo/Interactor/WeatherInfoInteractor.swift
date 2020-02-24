@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 import CoreLocation
 import GoogleSignIn
+import RealmSwift
 
 class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
+    
     var presenter: InteractorToPresenterProtocol?
     let locationManager = CLLocationManager()
-    
+    var realm: Realm!
+
     func fetchCurrentLocation(){
         //core location initialization
         DispatchQueue.main.async {
@@ -72,6 +75,22 @@ class WeatherInfoInteractor:NSObject, PresenterToInteractorProtocol {
         UserDefaults.standard.set(userId, forKey: kUserID)
         UserDefaults.standard.set(username, forKey: kUserName)
     }
+    
+    func saveLocation(_ location: String, lat: Double, long: Double) {
+        if realm == nil {
+            realm = try! Realm()
+        }
+        
+        let history = History()
+        history.placeName = location
+        history.latitude = lat
+        history.longitude = long
+        
+        try! self.realm.write({
+            self.realm.add(history)
+        })
+    }
+    
 }
 
 

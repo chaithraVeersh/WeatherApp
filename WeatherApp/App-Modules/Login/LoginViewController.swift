@@ -73,7 +73,9 @@ class LoginViewController: UIViewController  {
             weather.userName = userName
             weather.userId = userId
             if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
-                appdelegate.window?.rootViewController = weather
+                let nav = self.storyboard?.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController
+                nav?.viewControllers = [weather]
+                appdelegate.window?.rootViewController = nav
             }
         }
     }

@@ -14,29 +14,31 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         initialSetUp()
         if let _ =  UserDefaults.standard.value(forKey: kUserID) as? String {
-            let notice = WeatherInfoRouter.createModule()
-                   self.window = UIWindow(frame: UIScreen.main.bounds)
-                   self.window?.rootViewController = notice
-                   self.window?.makeKeyAndVisible()
-                   return true
+            let weather = WeatherInfoRouter.createModule()
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let nav = WeatherInfoRouter.mainstoryboard.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController
+            nav?.viewControllers = [weather]
+            self.window?.rootViewController = nav
+            self.window?.makeKeyAndVisible()
+            return true
         }
         return true
     }
-
+    
     func initialSetUp(){
         GIDSignIn.sharedInstance().clientID = googleSignInKey
         GMSPlacesClient.provideAPIKey(googlePlacesApiKey)
     }
-
+    
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-      return GIDSignIn.sharedInstance().handle(url)
+        return GIDSignIn.sharedInstance().handle(url)
     }
-
-
+    
+    
 }
 

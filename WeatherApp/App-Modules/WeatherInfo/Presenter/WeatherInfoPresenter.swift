@@ -9,8 +9,6 @@
 import UIKit
 
 class WeatherInfoPresenter: ViewToPresenterProtocol {
-    
-    
     var interactor: PresenterToInteractorProtocol?
     var router: PresenterToRouterProtocol?
     var view:PresenterToViewProtocol?
@@ -34,6 +32,10 @@ class WeatherInfoPresenter: ViewToPresenterProtocol {
     
     func logout() {
         interactor?.logOut()
+    }
+    
+    func saveLocationInDB(location: String, latitude: Double, longitude: Double) {
+        interactor?.saveLocation(location, lat: latitude, long: longitude)
     }
 }
 

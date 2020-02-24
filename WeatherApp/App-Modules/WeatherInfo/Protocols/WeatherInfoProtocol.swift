@@ -20,6 +20,7 @@ protocol ViewToPresenterProtocol: class{
     func fetchImageForUrl(_ urlString: String)
     func saveUserInDefaults(userId:String, username:String)
     func logout()
+    func saveLocationInDB(location:String, latitude:Double, longitude:Double)
 }
 
 protocol PresenterToViewProtocol: class{
@@ -41,6 +42,7 @@ protocol PresenterToInteractorProtocol: class {
     func fetchImageForIcon(icon: String)
     func saveUserInDefaults(userId:String, username:String)
     func logOut()
+    func saveLocation(_ location:String, lat:Double, long:Double)
 }
 
 protocol InteractorToPresenterProtocol: class {

@@ -37,8 +37,6 @@ class WeatherInfoViewController: UIViewController {
         
         //touch ID Authentication
         authenticationWithTouchID()
-        
-        
     }
     
     func setupUI() {
@@ -77,6 +75,14 @@ class WeatherInfoViewController: UIViewController {
         }
     }
     
+    @IBAction func historyButtonAction(_ sender: Any) {
+        DispatchQueue.main.async {
+            let history = HistoryRouter.createModule()
+            history.locationviewController = self
+            self.navigationController?.pushViewController(history, animated: true)
+        }
+    }
+    
     func updateUIOnSuccesfulAuthentication(){
         DispatchQueue.main.async {
             self.presenter?.fetchCurrentLocation()
@@ -87,6 +93,11 @@ class WeatherInfoViewController: UIViewController {
                 self.displayTextLabel.text = "Hey \(name)!"
             }
         }
+    }
+    
+    func selectedLocationHistory(_ history:History){
+        showPlaceName(place: history.placeName)
+        presenter?.fetchWeatherInfo(latitude: history.latitude, longitude: history.longitude)
     }
 }
 
@@ -137,7 +148,8 @@ extension WeatherInfoViewController: GMSAutocompleteViewControllerDelegate {
         // Get the place name from 'GMSAutocompleteViewController'
         // Then display the name in textField
         presenter?.fetchWeatherInfo(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-        placesTextField.text = place.name
+        placesTextField.text = place.name ?? ""
+        presenter?.saveLocationInDB(location: place.name ?? "", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         // Dismiss the GMSAutocompleteViewController when something is selected
         dismiss(animated: true, completion: nil)
     }

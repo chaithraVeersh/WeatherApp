@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4689DCDD23FE81A900C6E91D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCDC23FE81A900C6E91D /* HistoryViewController.swift */; };
+		4689DCDF23FE81D800C6E91D /* HistoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCDE23FE81D800C6E91D /* HistoryInteractor.swift */; };
+		4689DCE223FE81EF00C6E91D /* HistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCE123FE81EF00C6E91D /* HistoryPresenter.swift */; };
+		4689DCE523FE820F00C6E91D /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCE423FE820F00C6E91D /* History.swift */; };
+		4689DCE723FE822900C6E91D /* HistoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCE623FE822900C6E91D /* HistoryRouter.swift */; };
+		4689DCE923FE823900C6E91D /* HistoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCE823FE823900C6E91D /* HistoryProtocol.swift */; };
+		4689DCEB23FE8DEF00C6E91D /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689DCEA23FE8DEF00C6E91D /* HistoryCell.swift */; };
 		46D9153523FA6D74003A94F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9153423FA6D74003A94F8 /* Reachability.swift */; };
 		46D9153723FA6D98003A94F8 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9153623FA6D98003A94F8 /* AppUtils.swift */; };
 		46D9153923FA6DB6003A94F8 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9153823FA6DB6003A94F8 /* ProgressIndicator.swift */; };
@@ -31,6 +38,13 @@
 /* Begin PBXFileReference section */
 		0893D6C8BACD128249C04111 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		2329C1CA1458947B83281257 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4689DCDC23FE81A900C6E91D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		4689DCDE23FE81D800C6E91D /* HistoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryInteractor.swift; sourceTree = "<group>"; };
+		4689DCE123FE81EF00C6E91D /* HistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPresenter.swift; sourceTree = "<group>"; };
+		4689DCE423FE820F00C6E91D /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		4689DCE623FE822900C6E91D /* HistoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRouter.swift; sourceTree = "<group>"; };
+		4689DCE823FE823900C6E91D /* HistoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryProtocol.swift; sourceTree = "<group>"; };
+		4689DCEA23FE8DEF00C6E91D /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		46D9153423FA6D74003A94F8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		46D9153623FA6D98003A94F8 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		46D9153823FA6DB6003A94F8 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
@@ -67,6 +81,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4689DCD523FE813B00C6E91D /* History */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCDA23FE817800C6E91D /* View */,
+				4689DCD923FE816A00C6E91D /* Interactor */,
+				4689DCD823FE816400C6E91D /* presenter */,
+				4689DCD723FE815D00C6E91D /* Entity */,
+				4689DCD623FE814700C6E91D /* Router */,
+				4689DCDB23FE817D00C6E91D /* Protocol */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		4689DCD623FE814700C6E91D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCE623FE822900C6E91D /* HistoryRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4689DCD723FE815D00C6E91D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCE423FE820F00C6E91D /* History.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		4689DCD823FE816400C6E91D /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCE123FE81EF00C6E91D /* HistoryPresenter.swift */,
+			);
+			path = presenter;
+			sourceTree = "<group>";
+		};
+		4689DCD923FE816A00C6E91D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCDE23FE81D800C6E91D /* HistoryInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		4689DCDA23FE817800C6E91D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCDC23FE81A900C6E91D /* HistoryViewController.swift */,
+				4689DCEA23FE8DEF00C6E91D /* HistoryCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4689DCDB23FE817D00C6E91D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				4689DCE823FE823900C6E91D /* HistoryProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		46D9153223FA6D15003A94F8 /* App-Ui */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +170,7 @@
 			children = (
 				46D9153E23FA6E60003A94F8 /* Login */,
 				46D9153B23FA6E36003A94F8 /* WeatherInfo */,
+				4689DCD523FE813B00C6E91D /* History */,
 			);
 			path = "App-Modules";
 			sourceTree = "<group>";
@@ -101,12 +178,12 @@
 		46D9153B23FA6E36003A94F8 /* WeatherInfo */ = {
 			isa = PBXGroup;
 			children = (
-				46D9154223FA6E8F003A94F8 /* Protocols */,
 				46D9153C23FA6E46003A94F8 /* View */,
 				46D9153D23FA6E4C003A94F8 /* Interactor */,
 				46D9153F23FA6E7A003A94F8 /* Presenter */,
 				46D9154023FA6E80003A94F8 /* Entity */,
 				46D9154123FA6E88003A94F8 /* Router */,
+				46D9154223FA6E8F003A94F8 /* Protocols */,
 			);
 			path = WeatherInfo;
 			sourceTree = "<group>";
@@ -246,7 +323,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Chaithra TV";
 				TargetAttributes = {
 					9D6F092723F7FE8A002955DC = {
@@ -349,15 +426,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4689DCE523FE820F00C6E91D /* History.swift in Sources */,
 				46D9153723FA6D98003A94F8 /* AppUtils.swift in Sources */,
+				4689DCE723FE822900C6E91D /* HistoryRouter.swift in Sources */,
 				46D9154423FA6EC9003A94F8 /* WeatherInfoProtocol.swift in Sources */,
+				4689DCE923FE823900C6E91D /* HistoryProtocol.swift in Sources */,
+				4689DCE223FE81EF00C6E91D /* HistoryPresenter.swift in Sources */,
 				46D9154823FA6F3F003A94F8 /* WeatherInfoViewController.swift in Sources */,
+				4689DCDD23FE81A900C6E91D /* HistoryViewController.swift in Sources */,
 				46D9154E23FA6F8E003A94F8 /* weatherInfoRouter.swift in Sources */,
+				4689DCDF23FE81D800C6E91D /* HistoryInteractor.swift in Sources */,
 				46D9154C23FA6F70003A94F8 /* WeatherInfo.swift in Sources */,
 				9D6F093023F7FE8A002955DC /* LoginViewController.swift in Sources */,
 				9D6F094023F801D7002955DC /* AppConstants.swift in Sources */,
 				46D9153523FA6D74003A94F8 /* Reachability.swift in Sources */,
 				46D9154623FA6F23003A94F8 /* WeatherInfoInteractor.swift in Sources */,
+				4689DCEB23FE8DEF00C6E91D /* HistoryCell.swift in Sources */,
 				46D9155023FAE428003A94F8 /* Extension.swift in Sources */,
 				46D9153923FA6DB6003A94F8 /* ProgressIndicator.swift in Sources */,
 				9D6F092C23F7FE8A002955DC /* AppDelegate.swift in Sources */,
